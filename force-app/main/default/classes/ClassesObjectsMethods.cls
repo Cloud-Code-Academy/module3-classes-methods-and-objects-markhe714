@@ -40,17 +40,19 @@ public with sharing class ClassesObjectsMethods {
      */
     public static List<String> practiceStringMethods() {
         // Initialize a String with 'Hello, Salesforce!'
-        
-        // Get the length of the String        
+        string str = 'Hello, Salesforce!';
+        // Get the length of the String  
+        String lengthOfString = String.valueOf(str.length());      
         // Get a substring of the String of the first 5 characters
+        String subStringFirstFiveChara = str.left(5);
         // Convert the String to lower case
-        
+        String lowerCaseStr = str.toLowerCase();
         // Return the list with the string data
         // In the first position add the string length
         // In the second position add the substring
         // In the third position add the string in lower case
-
-        return null; // Replace null with the variable you used to store the result
+        List<String> outputStr = new List<String> {lengthOfString,subStringFirstFiveChara,lowerCaseStr};
+        return outputStr; // Replace null with the variable you used to store the result
     }
 
     /**
@@ -62,14 +64,18 @@ public with sharing class ClassesObjectsMethods {
      */
     public static List<Boolean> checkStringContent(String input) {
         // Initialize a list to store the results
-        
+        List<Boolean> outputList = new List<Boolean>();
         // Check if the string starts with 'Sales'
-        
+        Boolean startCheck = input.startsWith('Sales');
         // Check if the string ends with 'Force'
-        
+        Boolean endCheck = input.endsWith('Force');
         // Check if the string contains 'Awesome'
-        
-        return null; // Replace null with the variable you used to store the result
+        Boolean containsCheck = input.contains('Awesome');
+        // Add boolean values to the output list
+        outputList.add(startCheck);
+        outputList.add(endCheck);
+        outputList.add(containsCheck);
+        return outputList; // Replace null with the variable you used to store the result
     }
 
     /**
@@ -81,15 +87,21 @@ public with sharing class ClassesObjectsMethods {
      */
     public static String removeDuplicateWords(String sentence) {
         // Split the sentence into words
-
+        List<String> allWordsList = sentence.split(' ');
         // Create a set to store the unique words
-
+        Set<String> uniqueWordsSet = new Set<String>();
         // Add each word to the set
-
+        for (string word : allWordsList) {
+            uniqueWordsSet.add(word);    
+            }
         // Join the unique words back into a sentence
-
+        String outputSentence = '';
+        Integer i = 1;
+        for (string uniqueWord : uniqueWordsSet) {
+            outputSentence = outputSentence + uniqueWord + ' ';
+        }
         // Return the sentence with unique words
-        return null; // Replace null with the variable you used to store the result
+        return outputSentence.trim(); // Replace null with the variable you used to store the result
     }
 
     /**
@@ -102,7 +114,7 @@ public with sharing class ClassesObjectsMethods {
      */
     public static Integer countVowels(String str) {
         // Initialize the result Integer
-
+        Integer vowelsCount = 0;
         /*
         for () {
             // get individual characters from the string - hint use substring or split
@@ -110,9 +122,15 @@ public with sharing class ClassesObjectsMethods {
             // if it is a vowel, increment the result Integer
         }
         */
-
-        return null; // Replace null with the variable you used to store the result
-    }
+        List<String> characterList = new List<String>(str.split(''));
+        List<String> vowelsList = new List<String>{'a', 'e' , 'i', 'o', 'u'};
+        for(String currentCharactor : characterList) {
+            if (vowelsList.contains(currentCharactor)) {
+                vowelsCount ++;
+            }
+        }
+        return vowelsCount; // Replace null with the variable you used to store the result
+    }   
 
     /**
      * Question 5
@@ -126,6 +144,7 @@ public with sharing class ClassesObjectsMethods {
         List<String> scientistNames = new List<String>{'Tim Berners-Lee', 'Alan Turing', 'Grace Hopper', 'Donald Knuth', 'Guido van Rossum', 'Ken Thompson', 'Stephen Hawking'};
 
         // The variable to store the concatenated string
+        String concatenatedOutput = '';
 
         // Loop through the list of scientists' names
 
@@ -134,8 +153,12 @@ public with sharing class ClassesObjectsMethods {
             // Add the name to the result string, followed by a comma
 
         // Remove the last comma from the result string
-
-        return null; // Replace null with the variable you used to store the result
+        for(String currentName : scientistNames) {
+            if(currentName.contains('g') || currentName.contains('G')) {
+                concatenatedOutput = concatenatedOutput + currentName + ',';
+            }
+        }
+        return concatenatedOutput.removeEnd(','); // Replace null with the variable you used to store the result
     }
 
     /**
